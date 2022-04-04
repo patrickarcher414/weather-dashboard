@@ -1,4 +1,4 @@
-
+var container = document.querySelector('#container')
 var key = '3136490ddb596774fee3ee38098e9930'
 var searchBtn = document.querySelector('#searchBtn')
 
@@ -35,6 +35,7 @@ function getLocationData(city) {
     .then(function(locationData) {
         console.log(locationData)
         getCurrentWeather(locationData[0].lat, locationData[0].lon)
+       
     })
     .catch(function(err) {
         console.log(err)
@@ -48,17 +49,21 @@ function getCurrentWeather(lat, lon) {
     })
     .then(function(weatherData) {
         console.log(weatherData)
-        
+        var currentDiv = document.createElement('div')
+        var cityName = document.createElement('h2')
+
+        container.innerText = weatherData.current.temp
     })
     .catch(function(err) {
         console.log(err)
     })
 }
 
-function handleSearch(event) {
+function handleSearch(ev) {
+    ev.preventDefault();
+    getLocationData('milwaukee');
     
 }
 searchBtn.addEventListener('click', handleSearch) 
 
 
-getLocationData('milwaukee');
