@@ -1,14 +1,19 @@
 
 var key = '3136490ddb596774fee3ee38098e9930'
+var searchBtn = document.querySelector('#searchBtn')
 
 // var cityData = locationData[0]
 // var currentWeather = weatherData[0].current
+// var fivedayForecast = weatherData[0].daily
+
+// tomorrow's date
+//fivedayForecast[0].dt
 
 // // city name
 // cityData.name
 
 // // temp
-// currentWeather.temp_max
+// currentWeather.temp
 
 // // feels like
 // currentWeather.feels_like
@@ -49,5 +54,11 @@ function getCurrentWeather(lat, lon) {
         console.log(err)
     })
 }
+
+function handleSearch(event) {
+    
+}
+searchBtn.addEventListener('click', handleSearch) 
+
 
 getLocationData('milwaukee');
