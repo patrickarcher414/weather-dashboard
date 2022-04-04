@@ -1,35 +1,53 @@
 
-var lat, lon 
 var key = '3136490ddb596774fee3ee38098e9930'
-var weatherUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${key}`
-var geoUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${key}`
-var city = 'Milwaukee'
 
-// get city lat and lon with geocoding API
-fetch("http://api.openweathermap.org/geo/1.0/direct?q=" + city +"&appid=" + key)
+// var cityData = locationData[0]
+// var currentWeather = weatherData[0].current
+
+// // city name
+// cityData.name
+
+// // temp
+// currentWeather.temp_max
+
+// // feels like
+// currentWeather.feels_like
+
+// // wind
+// currentWeather.wind_speed
+
+// // humidity
+// currentWeather.humidity
+
+// // uv index
+// currentWeather.uvi
+
+function getLocationData(city) {
+    fetch("http://api.openweathermap.org/geo/1.0/direct?q=" + city +"&appid=" + key)
     .then(function(response) {
         return response.json()
     })
-    .then(function(data) {
-        var lat = data[0].lat
-        var lon = data[0].lon
-        console.log(lat)
-        console.log(lon)
+    .then(function(locationData) {
+        console.log(locationData)
+        getCurrentWeather(locationData[0].lat, locationData[0].lon)
     })
     .catch(function(err) {
         console.log(err)
     })
+}
 
-
-// get weather data for lat and lon returned from geocoding fetch
-// fetch("https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&appid=" + key)
-//     .then(function(response) {
-//         return response.json()
-//     })
-//     .then(function(data) {
-//         console.log(data)
+function getCurrentWeather(lat, lon) {
+    fetch("https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=" + key)
+    .then(function(response) {
+        return response.json()
+    })
+    .then(function(weatherData) {
+        console.log(weatherData)
         
-//     })
-//     .catch(function(err) {
-//         console.log(err)
-//     })
+    })
+    .catch(function(err) {
+        console.log(err)
+    })
+}
+
+getLocationData('milwaukee');
