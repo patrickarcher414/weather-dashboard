@@ -1,4 +1,5 @@
 
+var cities = [];
 var cityInput = document.querySelector('#citySearch')
 var container = document.querySelector('#container')
 var key = '3136490ddb596774fee3ee38098e9930'
@@ -72,12 +73,14 @@ function getCurrentWeather(lat, lon) {
     })
 }
 
+
 function handleSearch(ev) {
     ev.preventDefault();
     container.innerHTML = ""
     var cityName = cityInput.value
-    localStorage.setItem("city", cityName)
-    console.log(cityName)
+    cities.push(cityName)
+    localStorage.setItem("city", cities)
+    console.log(cities)
     getLocationData(cityName);
     
 }
